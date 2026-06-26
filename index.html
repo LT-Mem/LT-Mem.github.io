@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LT-VQA: Multi-Session Temporal Object-Centric QA Dataset</title>
+  <title>LT-Mem: Volatility-Aware Spatio-Temporal Memory for Lifelong Scene Understanding</title>
   <style>
 :root{
   --bg:#ffffff;
@@ -40,6 +40,30 @@ body{
   margin-bottom:10px;
 }
 
+.venue-badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:#111;
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.authors a{
+  color:var(--fg);
+  text-decoration:underline;
+  text-decoration-color:rgba(0,0,0,0.25);
+  text-underline-offset:3px;
+}
+.authors a:hover{text-decoration-color:#111}
+.authors sup{font-size:10px; color:var(--muted); margin-left:1px}
+
+.links{margin-top:18px; display:flex; flex-wrap:wrap; justify-content:center; gap:4px}
+
 h1{margin:10px 0 6px; font-size:44px}
 .subtitle{margin:0 0 18px; color:var(--muted); font-size:18px}
 
@@ -63,9 +87,9 @@ h1{margin:10px 0 6px; font-size:44px}
 .btn.small{padding:8px 10px; font-size:13px}
 
 .container{
-  max-width:980px;
+  max-width:1200px;
   margin:0 auto;
-  padding:26px 16px 40px;
+  padding:26px 24px 40px;
 }
 
 section{margin:34px 0}
@@ -80,7 +104,7 @@ h2{
   display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap:12px;
-  max-width:700px;
+  max-width:840px;
   margin:0 auto;
 }
 .stat{
@@ -314,9 +338,28 @@ pre{
 
 <!-- HERO -->
 <div class="hero">
-  <h1>LT-mem</h1>
+  <!-- TODO: confirm exact venue label, e.g. "IEEE/RSJ IROS 2026 · Accepted" -->
+  <span class="venue-badge">IROS 2026 · Accepted</span>
+  <h1>LT-Mem</h1>
   <p class="subtitle">Volatility-Aware Spatio-Temporal Memory for Lifelong Scene Understanding</p>
-  <p class="authors">Anonymous Authors</p>
+  <p class="authors">
+    <!-- TODO: replace # with each author's Google Scholar / homepage URL -->
+    <a href="#">Yumin Lee</a><sup>1</sup>,
+    <a href="#">Hyoseok Ju</a><sup>1</sup>,
+    <a href="#">Giseop Kim</a><sup>1</sup>
+    <!-- TODO: mark corresponding author with †, e.g. Giseop Kim<sup>1,†</sup>, and add a "† Corresponding author" footnote below -->
+  </p>
+  <p class="affil">
+    <sup>1</sup>Daegu Gyeongbuk Institute of Science and Technology (DGIST), Daegu, Republic of Korea
+  </p>
+  <div class="links">
+    <!-- TODO: replace each # with real URL once available -->
+    <a class="btn" href="#">📄 Paper</a>
+    <a class="btn" href="#">arXiv</a>
+    <a class="btn" href="#">💻 Code</a>
+    <a class="btn" href="#">🎥 Video</a>
+    <a class="btn" href="#">📥 Dataset</a>
+  </div>
 </div>
 
 <div class="container">
@@ -346,7 +389,7 @@ pre{
       src="figure2.png"
       alt="LT-Mem pipeline"
       loading="lazy"
-      style="width:100%; max-width:900px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
+      style="width:100%; max-width:1100px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
     />
     <p style="font-size:15px;line-height:1.7;margin:0 0 16px">
       A volatility-aware memory evolution framework. Update decisions are governed by a volatility-conditioned reasoning layer, optionally assisted by a constrained LLM, producing a Tri-Memory structure (Live, Delta, Meta) that preserves both current and historical object states.
@@ -451,7 +494,9 @@ pre{
             <div class="muted" style="font-size:13px;margin-bottom:12px">
               Multi-session RGB video, globally aligned poses, per-session pointmaps, per-object annotations, and temporal QA pairs for all 3 environments.
             </div>
-            <a class="btn" href="#" style="display:inline-block">Download (coming soon)</a>
+            <!-- TODO: replace with real download URL (HuggingFace / Google Form / GitHub LFS / direct link) -->
+            <a class="btn" href="#" style="display:inline-block">📥 Download (coming soon)</a>
+            <!-- TODO: optionally add a second link for "Request access" form or GitHub repo -->
           </div>
           <div class="card">
             <div style="font-weight:800;margin-bottom:6px">🗂️ Annotation Format</div>
@@ -486,6 +531,22 @@ pre{
         </div>
       </section>
 
+      <!-- BIBTEX -->
+      <section>
+        <h2>BibTeX</h2>
+        <p class="muted" style="font-size:13px;margin:0 0 10px">
+          If you find LT-Mem or LT-VQA useful, please cite our paper:
+        </p>
+        <!-- TODO: replace with the official IROS 2026 bibtex once proceedings are out (add pages, doi, address, publisher) -->
+        <pre id="bibtex">@inproceedings{lee2026ltmem,
+  title     = {Volatility-Aware Spatio-Temporal Memory for Lifelong Scene Understanding},
+  author    = {Lee, Yumin and Ju, Hyoseok and Kim, Giseop},
+  booktitle = {Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2026},
+}</pre>
+        <button class="btn small" id="bibtex-copy" onclick="copyBibtex()" style="margin-top:10px">Copy</button>
+      </section>
+
       <script>
       function showTab(name) {
         ["delta","live","meta"].forEach(t => {
@@ -493,10 +554,23 @@ pre{
           document.getElementById("btn-"+t).style.background = t === name ? "var(--btnHover)" : "var(--btn)";
         });
       }
+      function copyBibtex() {
+        const text = document.getElementById("bibtex").innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.getElementById("bibtex-copy");
+          const original = btn.innerText;
+          btn.innerText = "Copied ✓";
+          setTimeout(() => { btn.innerText = original; }, 1500);
+        });
+      }
       </script>
 
       <div class="footer">
-        <a href="https://ltmem-dataset.github.io/" style="color:var(--muted)">ltmem-dataset.github.io</a>
+        <p style="margin:0">© 2026 Daegu Gyeongbuk Institute of Science and Technology</p>
+        <p style="margin:6px 0 0; font-size:12px">
+          Project page template inspired by
+          <a href="https://nerfies.github.io/" style="color:var(--muted)">Nerfies</a>.
+        </p>
       </div>
 
     </div>
