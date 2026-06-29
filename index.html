@@ -31,6 +31,37 @@ body{
   background:var(--bg);
 }
 
+.topnav{
+  width:100%;
+  background:#0d0d10;
+  color:#fff;
+  padding:14px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.topnav .brand{
+  font-weight:800;
+  font-size:18px;
+  color:#fff;
+  text-decoration:none;
+  letter-spacing:.04em;
+}
+.topnav .nav-links{display:flex; gap:4px; flex-wrap:wrap}
+.topnav .nav-links a{
+  color:#cfd2d8;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:14px;
+  transition:background .15s, color .15s;
+}
+.topnav .nav-links a:hover{
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+}
+
 .hero{
   padding:48px 16px 22px;
   text-align:center;
@@ -94,9 +125,9 @@ h1{margin:10px 0 6px; font-size:44px}
 .btn.small{padding:8px 10px; font-size:13px}
 
 .container{
-  max-width:1200px;
+  max-width:1400px;
   margin:0 auto;
-  padding:26px 24px 40px;
+  padding:26px 32px 40px;
 }
 
 section{margin:34px 0}
@@ -110,8 +141,8 @@ h2{
 .stats{
   display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
-  gap:12px;
-  max-width:840px;
+  gap:14px;
+  max-width:960px;
   margin:0 auto;
 }
 .stat{
@@ -397,11 +428,22 @@ h2::before{
 </head>
 <body>
 
+<!-- TOP NAV (dark horizontal banner) -->
+<nav class="topnav">
+  <a class="brand" href="#top">LT-Mem</a>
+  <div class="nav-links">
+    <a href="#method">Method</a>
+    <a href="#dataset">Dataset</a>
+    <a href="#download">Download</a>
+    <a href="#cite">BibTeX</a>
+  </div>
+</nav>
+
 <!-- HERO -->
-<div class="hero">
-  <!-- TODO: confirm exact venue label, e.g. "IEEE/RSJ IROS 2026 · Accepted" -->
-  <span class="venue-badge">IROS 2026 · Accepted</span>
+<div class="hero" id="top">
   <h1>LT-Mem</h1>
+  <!-- TODO: confirm exact venue label, e.g. "IEEE/RSJ IROS 2026 · Accepted" -->
+  <div style="margin:6px 0 14px"><span class="venue-badge">IROS 2026 · Accepted</span></div>
   <p class="subtitle">Volatility-Aware Spatio-Temporal Memory for Lifelong Scene Understanding</p>
   <p class="authors">
     <!-- TODO: replace # with each author's Google Scholar / homepage URL -->
@@ -444,13 +486,13 @@ h2::before{
   </section>
 
   <!-- LT-mem Framework -->
-  <section>
+  <section id="method">
     <h2>LT-mem Framework</h2>
     <img
       src="figure2.png"
       alt="LT-Mem pipeline"
       loading="lazy"
-      style="width:100%; max-width:1100px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
+      style="width:100%; max-width:1300px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
     />
     <p style="font-size:15px;line-height:1.7;margin:0 0 16px">
       A volatility-aware memory evolution framework. Update decisions are governed by a volatility-conditioned reasoning layer, optionally assisted by a constrained LLM, producing a Tri-Memory structure (Live, Delta, Meta) that preserves both current and historical object states.
@@ -458,7 +500,7 @@ h2::before{
   </section>
 
   <!-- OVERVIEW -->
-  <section>
+  <section id="dataset">
     <h2>LT-VQA Dataset</h2>
     <p style="font-size:15px;line-height:1.7;margin:0 0 16px">
       LT-VQA is a controlled multi-session dataset for evaluating <strong>long-term object-centric scene understanding</strong>.
@@ -547,7 +589,7 @@ h2::before{
     </div>
   </section>
 
-  <section>
+  <section id="download">
         <h2>Download</h2>
         <div class="dl-grid">
           <div class="card">
@@ -593,7 +635,7 @@ h2::before{
       </section>
 
       <!-- BIBTEX -->
-      <section>
+      <section id="cite">
         <h2>BibTeX</h2>
         <p class="muted" style="font-size:13px;margin:0 0 10px">
           If you find LT-Mem or LT-VQA useful, please cite our paper:
