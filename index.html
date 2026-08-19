@@ -281,7 +281,7 @@ pre{
 
 .env-grid{
   display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
+  grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:12px;
   margin-top:12px;
 }
@@ -291,8 +291,11 @@ pre{
   background:var(--card);
   padding:16px;
 }
-.env-card--featured{
-  grid-column:1 / -1;
+.env-video--lab-s{
+  display:block;
+  width:104%;
+  max-width:none;
+  margin-left:-2%;
 }
 .env-frames-strip{
   display:block;
@@ -425,7 +428,6 @@ pre{
   .grid{grid-template-columns: repeat(2, minmax(0,1fr))}
   .dl-grid{grid-template-columns: 1fr}
   .env-grid{grid-template-columns: 1fr}
-  .env-card--featured{grid-column:auto}
   .pillars{grid-template-columns: 1fr}
   h1{font-size:36px}
 }
@@ -505,8 +507,8 @@ pre{
     <!-- ENVIRONMENTS (sub-section of LT-VQA Dataset) -->
     <h3 class="subhead">Environments</h3>
     <div class="env-grid">
-      <div class="env-card env-card--featured" style="padding:0;overflow:hidden">
-        <video src="lab-s.mp4" autoplay loop muted playsinline style="width:100%;display:block;"></video>
+      <div class="env-card" style="padding:0;overflow:hidden">
+        <video class="env-video--lab-s" src="lab-s.mp4" autoplay loop muted playsinline></video>
         <img class="env-frames-strip" src="lab-s-frames.png" alt="Lab-S example frames" loading="lazy" />
         <div style="padding:16px">
           <div class="name">🏠 Lab-S</div>
