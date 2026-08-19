@@ -115,7 +115,7 @@ h1{
 .btn .icon{display:inline-flex; align-items:center; justify-content:center}
 
 .container{
-  max-width:1040px;
+  max-width:1400px;
   margin:0 auto;
   padding:10px 24px 40px;
 }
@@ -129,9 +129,32 @@ h2{
   font-weight:700;
   letter-spacing:-0.01em;
 }
-/* Narrow, justified body text like the template's abstract column */
+.result-figure{
+  max-width:1300px;
+  margin:0 auto 18px;
+}
+.result-figure img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  border:1px solid var(--line);
+}
+.table-wrap{max-width:1300px; margin:24px auto 0; overflow-x:auto}
+.subhead{
+  text-align:center;
+  font-family: "Google Sans", "Noto Sans", sans-serif;
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  margin:52px 0 18px;
+  color:var(--fg);
+}
+.subhead::before{content:"— "; color:var(--muted); font-weight:400}
+.subhead::after{content:" —"; color:var(--muted); font-weight:400}
+/* Body text matches the media width (figures / tables / videos) */
 section > p{
-  max-width:820px !important;
+  max-width:1300px !important;
   margin-left:auto !important;
   margin-right:auto !important;
   text-align:justify;
@@ -142,7 +165,7 @@ section > p{
   display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap:14px;
-  max-width:960px;
+  max-width:1300px;
   margin:0 auto;
 }
 .stat{
@@ -258,7 +281,7 @@ pre{
 
 .env-grid{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:12px;
   margin-top:12px;
 }
@@ -267,6 +290,14 @@ pre{
   border-radius:var(--radius);
   background:var(--card);
   padding:16px;
+}
+.env-card--featured{
+  grid-column:1 / -1;
+}
+.env-frames-strip{
+  display:block;
+  width:100%;
+  border-top:1px solid var(--line);
 }
 .env-card .name{font-weight:800; font-size:15px; margin-bottom:6px}
 .env-card .desc{font-size:13px; color:var(--muted); margin-bottom:10px}
@@ -382,12 +413,19 @@ pre{
 #tab-delta{border-left:3px solid var(--accent-delta)}
 #tab-live{border-left:3px solid var(--accent-live)}
 #tab-meta{border-left:3px solid var(--accent-meta)}
+/* Keep all annotation tabs the same size regardless of content length */
+#tab-delta, #tab-live, #tab-meta{
+  min-height:184px;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
 
 @media (max-width: 900px){
   .stats{grid-template-columns: repeat(2, minmax(0,1fr))}
   .grid{grid-template-columns: repeat(2, minmax(0,1fr))}
   .dl-grid{grid-template-columns: 1fr}
   .env-grid{grid-template-columns: 1fr}
+  .env-card--featured{grid-column:auto}
   .pillars{grid-template-columns: 1fr}
   h1{font-size:36px}
 }
@@ -408,8 +446,8 @@ pre{
   <!-- TODO: confirm exact venue label, e.g. "IEEE/RSJ IROS 2026" -->
   <div class="venue-badge">IROS 2026 <span class="accepted">(Accepted)</span></div>
   <div class="links">
-    <!-- TODO: replace each # with real URL once available -->
-    <a class="btn" href="#"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a>
+    <!-- TODO: replace each remaining # with real URL once available -->
+    <a class="btn" href="https://lt-mem.github.io/DEMO/" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-cube"></i></span><span>Demo</span></a>
     <a class="btn" href="#"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a>
     <a class="btn" href="#"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
     <a class="btn" href="#"><span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span></a>
@@ -444,7 +482,7 @@ pre{
       src="figure2.png"
       alt="LT-Mem pipeline"
       loading="lazy"
-      style="width:100%; max-width:850px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
+      style="width:100%; max-width:1300px; height:auto; display:block; margin:0 auto 16px; border-radius:12px; border:1px solid var(--line); background:#fff;"
     />
     <p style="font-size:15px;line-height:1.7;margin:0 0 16px">
       A volatility-aware memory evolution framework. Update decisions are governed by a volatility-conditioned reasoning layer, optionally assisted by a constrained LLM, producing a Tri-Memory structure (Live, Delta, Meta) that preserves both current and historical object states.
@@ -464,14 +502,13 @@ pre{
       <div class="stat"><div class="k">30</div><div class="l">Sessions Total</div></div>
       <div class="stat"><div class="k">80</div><div class="l">QA Pairs</div></div>
     </div>
-  </section>
 
-  <!-- ENVIRONMENTS -->
-  <section>
-    <h2>Environments</h2>
+    <!-- ENVIRONMENTS (sub-section of LT-VQA Dataset) -->
+    <h3 class="subhead">Environments</h3>
     <div class="env-grid">
-      <div class="env-card" style="padding:0;overflow:hidden">
+      <div class="env-card env-card--featured" style="padding:0;overflow:hidden">
         <video src="lab-s.mp4" autoplay loop muted playsinline style="width:100%;display:block;"></video>
+        <img class="env-frames-strip" src="lab-s-frames.png" alt="Lab-S example frames" loading="lazy" />
         <div style="padding:16px">
           <div class="name">🏠 Lab-S</div>
           <div class="desc">Compact indoor room — Instance History Tracking</div>
@@ -483,6 +520,7 @@ pre{
       </div>
       <div class="env-card" style="padding:0;overflow:hidden">
         <video src="lab-l.mp4" autoplay loop muted playsinline style="width:100%;display:block;"></video>
+        <img class="env-frames-strip" src="lab-l-frames.png" alt="Lab-L example frames" loading="lazy" />
         <div style="padding:16px">
           <div class="name">🏢 Lab-L</div>
           <div class="desc">Larger indoor space — Instance History Tracking</div>
@@ -494,6 +532,7 @@ pre{
       </div>
       <div class="env-card" style="padding:0;overflow:hidden">
         <video src="parkinglot.mp4" autoplay loop muted playsinline style="width:100%;display:block;"></video>
+        <img class="env-frames-strip" src="parkinglot-frames.png" alt="Parking Lot example frames" loading="lazy" />
         <div style="padding:16px">
           <div class="name">🚗 Parking Lot</div>
           <div class="desc">Outdoor scene — Spatial Statistics</div>
@@ -504,11 +543,9 @@ pre{
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- OBJECT LIST -->
-  <section>
-    <h2>Tracked Objects</h2>
+    <!-- OBJECT LIST (sub-section of LT-VQA Dataset) -->
+    <h3 class="subhead">Tracked Objects</h3>
     <div class="group">
       <div class="group-h">Lab-S</div>
       <div class="tracked-grid">
@@ -541,6 +578,91 @@ pre{
     </div>
   </section>
 
+  <!-- RESULTS -->
+  <section id="results">
+    <h2>Results</h2>
+
+    <!-- QUANTITATIVE: main table (Table V) -->
+    <h3 class="subhead">Quantitative Results</h3>
+    <div class="table-wrap">
+      <table class="baseline-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Event F1 &uarr;</th>
+            <th>QA-Event &uarr;</th>
+            <th>QA-Freq &uarr;</th>
+            <th>Tokens &darr;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Geometric Only</td><td>0.630</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">&ndash;</td></tr>
+          <tr><td>Text-Batch</td><td>0.460</td><td>0.300</td><td>0.267</td><td>1,992K</td></tr>
+          <tr><td>VLM-Batch</td><td>0.790</td><td>0.680</td><td>0.333</td><td>7,152K</td></tr>
+          <tr><td>STAR</td><td>0.420</td><td>0.460</td><td class="na">N/A</td><td>55,622K</td></tr>
+          <tr><td><strong>LT-Mem (Qwen2.5-3B)</strong></td><td>0.885</td><td>0.800</td><td>0.567</td><td class="best">431K</td></tr>
+          <tr><td><strong>LT-Mem (Gemini 2.5 Pro)</strong></td><td class="best">0.910</td><td class="best">0.820</td><td class="best">0.600</td><td>438K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      On LT-VQA (Lab-S + Lab-L combined), LT-Mem achieves state-of-the-art results across all metrics.
+      With a Gemini 2.5 Pro reasoner it reaches <strong>0.910</strong> Event F1, <strong>0.820</strong> QA-Event,
+      and <strong>0.600</strong> QA-Freq, surpassing the strongest vision baseline (VLM-Batch) while consuming
+      <strong>~16&times; fewer tokens</strong> (438K vs 7,152K). Even with a lightweight local Qwen2.5-3B reasoner,
+      LT-Mem still outperforms every baseline &mdash; showing the gain comes from the structured memory
+      architecture, not LLM capacity.
+    </p>
+
+    <!-- QUALITATIVE: demo video, QA examples, spatial-statistics figure -->
+    <h3 class="subhead">Qualitative Results</h3>
+    <video src="irosresults.mp4" controls autoplay loop muted playsinline
+           style="width:100%;max-width:1300px;display:block;margin:0 auto 22px;border-radius:12px;border:1px solid var(--line);background:#000;"></video>
+
+    <div class="table-wrap">
+      <div class="qa-block">
+        <div class="qa-head">Delta Memory &mdash; event history</div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "When did the scissors first appear?"</div>
+          <div class="qa-a">A: The scissors first appeared in Session 3.</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "What happened to the robot dog at Session 6?"</div>
+          <div class="qa-a">A: At Session 6, the robot dog moved from (&minus;0.81, 0.43, 1.77) to (&minus;0.97, 2.52, &minus;2.27).</div>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-head">Live Memory &mdash; current state</div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "Where did the trash bin end up after all sessions?"</div>
+          <div class="qa-a">A: At the end (S10), the trash bin was at (&minus;0.65, 0.52, 1.49).</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "Where is the green chair now?"</div>
+          <div class="qa-a">A: At (2.95, 0.89, 0.25) as of Session 10.</div>
+        </div>
+      </div>
+      <div class="qa-block">
+        <div class="qa-head">Meta Memory &mdash; long-term statistics</div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "Can I use the printer as a navigation landmark?"</div>
+          <div class="qa-a">A: Yes. Volatility 0.02, highly stable. Use its position at (&minus;1.75, 0.28, 0.50) from S1 as reference.</div>
+        </div>
+        <div class="qa-row">
+          <div class="qa-q">Q: "Which object moved most frequently?"</div>
+          <div class="qa-a">A: The brown basket (4 moves).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-figure" style="margin-top:22px"><img src="results.png" alt="Parking Lot spatial-statistics temporal QA" loading="lazy" /></div>
+    <p>
+      On the Parking Lot sequence, LT-Mem aggregates per-session vehicle counts in Meta Memory to answer
+      temporal occupancy queries (e.g., <em>"When should I go if I want to find a parking spot?"</em>) through
+      deterministic lookup, without additional inference.
+    </p>
+  </section>
+
   <section id="download">
         <h2>Download</h2>
         <div class="dl-grid">
@@ -549,38 +671,39 @@ pre{
             <div class="muted" style="font-size:13px;margin-bottom:12px">
               Multi-session RGB video, globally aligned poses, per-session pointmaps, per-object annotations, and temporal QA pairs for all 3 environments.
             </div>
-            <!-- TODO: replace with real download URL (HuggingFace / Google Form / GitHub LFS / direct link) -->
-            <a class="btn" href="#" style="display:inline-block">📥 Download (coming soon)</a>
+            <a class="btn" href="https://drive.google.com/drive/folders/1rrwXxJDqJO9P9-wf_-JENX6FP1v9AThC" target="_blank" rel="noopener noreferrer" style="display:inline-block">📥 Download Dataset</a>
             <!-- TODO: optionally add a second link for "Request access" form or GitHub repo -->
           </div>
           <div class="card">
             <div style="font-weight:800;margin-bottom:6px">🗂️ Annotation Format</div>
             <div class="muted" style="font-size:13px;margin-bottom:8px">
-              Per-session event labels, object centroids, volatility scores, and QA pairs in JSON.
+              Per-session object-level event labels and temporal QA pairs, provided in JSON.
             </div>
             <div style="display:flex;gap:6px;margin-bottom:8px;">
-              <button class="btn small" onclick="showTab('delta')" id="btn-delta" style="background:var(--btnHover)">Delta Memory</button>
-              <button class="btn small" onclick="showTab('live')" id="btn-live">Live Memory</button>
-              <button class="btn small" onclick="showTab('meta')" id="btn-meta">Meta Memory</button>
+              <button class="btn small" onclick="showTab('delta')" id="btn-delta" style="background:var(--btnHover)">Event Label</button>
+              <button class="btn small" onclick="showTab('live')" id="btn-live">QA-Event</button>
+              <button class="btn small" onclick="showTab('meta')" id="btn-meta">QA-Freq</button>
             </div>
             <pre id="tab-delta">{
     "session": "S6",
     "object": "robot_dog",
     "event": "MOVE",
-    "from": [-0.81, 0.44, 1.77],
-    "to": [-0.96, 2.52, -2.27],
-    "displacement_m": 4.6
+    "from": [-0.81, 0.43, 1.77],
+    "to": [-0.97, 2.52, -2.27],
+    "displacement_m": 4.60
   }</pre>
             <pre id="tab-live" style="display:none">{
-    "object": "robot_dog",
-    "position": [-2.1, 0.3, 2.0],
-    "last_updated": "S10"
+    "type": "QA-Event",
+    "question": "What happened to the robot dog at Session 6?",
+    "answer": "At S6, the robot dog moved from (-0.81, 0.43, 1.77) to (-0.97, 2.52, -2.27).",
+    "target_object": "robot_dog",
+    "sessions": ["S6"]
   }</pre>
             <pre id="tab-meta" style="display:none">{
-    "object": "robot_dog",
-    "volatility": 0.45,
-    "move_count": 2,
-    "classification": "semi-static"
+    "type": "QA-Freq",
+    "question": "Which object moved most frequently?",
+    "answer": "The brown basket (4 moves).",
+    "target_object": "brown_basket"
   }</pre>
           </div>
         </div>
