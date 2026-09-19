@@ -482,6 +482,11 @@ pre{
   h1{font-size:36px}
   .demo-cta{padding:11px 22px; font-size:16px}
 }
+
+.own-data-demo{max-width:1300px;margin:56px auto}
+.own-data-demo .demo-intro{max-width:840px!important;text-align:center;margin-bottom:24px;color:var(--muted)}
+.own-data-video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--radius);background:#f5f8f4}
+.own-data-demo .demo-note{text-align:center;font-size:13px;color:var(--muted);margin-top:12px}
   </style>
 </head>
 <body>
@@ -498,6 +503,7 @@ pre{
   <div class="venue-badge">IROS 2026 <span class="award-finalist">(Best Paper / Best Student Paper Award Finalist)</span></div>
   <a class="demo-cta" href="https://lt-mem.github.io/DEMO/" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-cube"></i></span><span>Interactive Demo</span></a>
   <div class="links">
+    <a class="btn" href="#own-data"><span class="icon" aria-hidden="true"><i class="fas fa-upload"></i></span><span>Try your own data</span></a>
     <a class="btn" href="https://arxiv.org/abs/2608.19059" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a>
     <a class="btn" href="#"><span class="icon"><i class="fab fa-github"></i></span><span>Code (TBD)</span></a>
     <a class="btn" href="https://www.youtube.com/watch?v=-zH3TV1hUjA" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span></a>
@@ -505,6 +511,16 @@ pre{
 </div>
 
 <div class="container">
+
+  <section id="own-data" class="own-data-demo" aria-labelledby="own-data-heading">
+    <h2 id="own-data-heading">Try it with your own data</h2>
+    <p class="demo-intro">Record the same space at different moments, upload your videos, and choose the objects to track. LT-Mem aligns the sessions, builds object memories, and lets you ask questions about what changed.</p>
+    <video class="own-data-video" controls playsinline preload="none" poster="assets/own-data-demo-poster.jpg" aria-label="LT-Mem own-data demo: three videos, object tracking, session alignment, memory, and question answering">
+      <source src="assets/own-data-demo.mp4" type="video/mp4">
+      Your browser does not support embedded video. <a href="assets/own-data-demo.mp4">Download the demo video</a>.
+    </video>
+    <p class="demo-note">Recorded on a local NVIDIA GPU. Playback speed is indicated in the video.</p>
+  </section>
 
   <section aria-labelledby="contributions-heading">
     <h2 id="contributions-heading">Contributions</h2>
